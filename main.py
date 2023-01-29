@@ -1,4 +1,5 @@
 import smtplib
+import sys
 import time
 from email.message import EmailMessage
 
@@ -17,18 +18,16 @@ if __name__ == "__main__":
     for i in range(3):
         try:
             soup = BeautifulSoup(page.content, "html.parser")
+            time.sleep(10)
             product_title = soup.select_one("#productTitle").get_text(strip=True)
             price_whole = soup.select_one('.a-price-whole').get_text(strip=True)
             price_fraction = soup.select_one('.a-price-fraction').get_text(strip=True)
             break
         except AttributeError as e:
-            if str(e) == "'NoneType' object has no attribute 'get_text'":
-                product_title = "Unable to download the product name."
-                price_whole = "0"
-                price_fraction = "0"
-            else:
-                raise e
-            time.sleep(15)
+            print(e)
+            if i == 2:
+                sys.exit()
+            time.sleep(10)
 
     price = price_whole + price_fraction
 
