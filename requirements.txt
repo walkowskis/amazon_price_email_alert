@@ -1,2 +1,4 @@
-beautifulsoup4==4.11.1
+beautifulsoup4~=4.11.2
 requests==2.28.2
+amazoncaptcha~=0.5.9
+selenium~=4.8.0
